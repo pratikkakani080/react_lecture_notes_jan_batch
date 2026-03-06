@@ -3,12 +3,14 @@ import './App.css'
 import Home from './modules/home';
 import Blogs from './modules/blogs';
 import BlogDetails from './modules/blogs/blogDetails';
+import ContactUs from './modules/contactus';
 
 function App() {
   const router = createBrowserRouter([
     { path: "/", Component: Home },
     { path: "/blog", Component: Blogs },
     { path: "/blog-details/:id/:category", Component: BlogDetails },
+    { path: "/contactus", Component: ContactUs },
   ]);
 
   return (
