@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "../../components/button"
+import { toast } from "react-toastify";
 
 const initialState = {
     userName: '',
@@ -12,11 +13,32 @@ function ContactUs() {
     // const [email, setEmail] = useState('')
     // const [phone, setPhone] = useState('')
     const [userInfo, setUserInfo] = useState(initialState)
+    const [errors, setErrors] = useState<any>({})
 
     const handleChange = (event: any) => {
         // console.log(userInfo, event.target.name, event.target.value);
         const { name, value, type, checked } = event.target
         setUserInfo({ ...userInfo, [name]: type === "checkbox" ? checked : value })
+        setErrors({ ...errors, [name]: '' })
+    }
+
+    const validate = () => {
+        let err: any = {}
+        let formIsValid = true
+        // if (Object.keys(userInfo).find(key => userInfo[key] === '')) {
+        //     err[key] = `please provide ${key}`
+        //     formIsValid = false
+        // }
+         if (!userInfo.email) {
+            err.email = 'please provide email'
+            formIsValid = false
+        }
+        if (!userInfo.phone) {
+            err.phone = 'please provide phone'
+            formIsValid = false
+        } 
+        setErrors(err)
+        return formIsValid
     }
 
     console.log(userInfo);
@@ -25,7 +47,12 @@ function ContactUs() {
         // localStorage.setItem('email', email)
         // localStorage.setItem('phone', phone)
         // sessionStorage.setItem('userName', userName)
-        localStorage.setItem('userInfo', JSON.stringify(userInfo))
+       if (validate()) {
+           localStorage.setItem('userInfo', JSON.stringify(userInfo))
+           toast.success('Your data is saved with us')
+        } else {
+           toast.error('Please fill out the required fields')
+       }
     }
 
     return (
@@ -40,16 +67,18 @@ function ContactUs() {
                 onChange={handleChange}
             />
             <label htmlFor="email">
-                Email
+                Email <span style={{ color: 'red'}}>*</span>
+                {errors.email && <span style={{ color: 'red'}}>{errors.email}</span>}
             </label>
             <input
                 id="email"
                 name="email"
                 type="email"
                 onChange={handleChange}
-            />
+                />
             <label htmlFor="phone">
-                Phone
+                Phone <span style={{ color: 'red'}}>*</span>
+                {errors.phone && <span style={{ color: 'red'}}>{errors.phone}</span>}
             </label>
             <input
                 id="phone"

@@ -4,6 +4,7 @@ import Home from './modules/home';
 import Blogs from './modules/blogs';
 import BlogDetails from './modules/blogs/blogDetails';
 import ContactUs from './modules/contactus';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const router = createBrowserRouter([
@@ -18,6 +19,7 @@ function App() {
     <div>
       <a href='/blog'>to blog</a>
     </div>
+     <ToastContainer />
       <RouterProvider router={router} />
     </>
   )
