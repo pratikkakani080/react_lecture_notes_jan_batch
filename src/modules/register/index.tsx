@@ -5,10 +5,11 @@ import { toast } from "react-toastify";
 const initialState = {
     userName: '',
     email: '',
-    phone: ''
+    phone: '',
+    password: ''
 }
 
-function ContactUs() {
+function Register() {
     // const [userName, setUserName] = useState('')
     // const [email, setEmail] = useState('')
     // const [phone, setPhone] = useState('')
@@ -41,15 +42,20 @@ function ContactUs() {
         return formIsValid
     }
 
-    console.log(userInfo);
+    // console.log(userInfo);
     const handleSubmit = () => {
         // localStorage.setItem('userName', userName)
         // localStorage.setItem('email', email)
         // localStorage.setItem('phone', phone)
         // sessionStorage.setItem('userName', userName)
        if (validate()) {
-           localStorage.setItem('userInfo', JSON.stringify(userInfo))
+        console.log(localStorage.getItem('userInfo'))
+        const storedUsers = JSON.parse(localStorage.getItem('userInfo') || '[]')
+        // storedUsers.push(userInfo)
+        let users = userInfo ? [...storedUsers, userInfo] : []
+           localStorage.setItem('userInfo', JSON.stringify(users))
            toast.success('Your data is saved with us')
+           setUserInfo(initialState)
         } else {
            toast.error('Please fill out the required fields')
        }
@@ -64,8 +70,9 @@ function ContactUs() {
                 id="userName"
                 name="userName"
                 type="text"
+                value={userInfo.userName}
                 onChange={handleChange}
-            />
+            /><br/>
             <label htmlFor="email">
                 Email <span style={{ color: 'red'}}>*</span>
                 {errors.email && <span style={{ color: 'red'}}>{errors.email}</span>}
@@ -74,8 +81,9 @@ function ContactUs() {
                 id="email"
                 name="email"
                 type="email"
+                value={userInfo.email}
                 onChange={handleChange}
-                />
+                /><br/>
             <label htmlFor="phone">
                 Phone <span style={{ color: 'red'}}>*</span>
                 {errors.phone && <span style={{ color: 'red'}}>{errors.phone}</span>}
@@ -84,17 +92,28 @@ function ContactUs() {
                 id="phone"
                 name="phone"
                 type="tel"
+                value={userInfo.phone}
                 onChange={handleChange}
-            />
+            /><br />
+             <label htmlFor="password">
+               Password
+            </label>
+            <input
+                id="password"
+                name="password"
+                type="password"
+                value={userInfo.password}
+                onChange={handleChange}
+            /><br/>
             <input type="checkbox" id="vehicle1" name="Bike" value="Bike" onChange={handleChange} />
             <label htmlFor="vehicle1"> I have a bike</label><br />
             <input type="checkbox" id="vehicle2" name="Car" value="Car" onChange={handleChange} />
             <label htmlFor="vehicle2"> I have a car</label><br />
             <input type="checkbox" id="vehicle3" name="Boat" value="Boat" onChange={handleChange} />
-            <label htmlFor="vehicle3"> I have a boat</label><br></br>
+            <label htmlFor="vehicle3"> I have a hiplicopter</label><br></br>
             <Button buttonText={'Submit'} onClick={handleSubmit} />
         </div>
     )
 }
 
-export default ContactUs
+export default Register
