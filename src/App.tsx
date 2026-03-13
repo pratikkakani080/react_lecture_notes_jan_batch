@@ -6,6 +6,7 @@ import BlogDetails from './modules/blogs/blogDetails';
 import Register from './modules/register';
 import { ToastContainer } from 'react-toastify';
 import Login from './modules/login';
+import GSM from './modules/GSM';
 
 function App() {
   const router = createBrowserRouter([
@@ -14,6 +15,7 @@ function App() {
     { path: "/blog-details/:id/:category", Component: BlogDetails },
     { path: "/register", Component: Register },
     { path: "/login", Component: Login },
+    { path: "/gsm", Component: GSM },
   ]);
   const loggedInEmail = localStorage.getItem('loggedInEmail')
 
