@@ -7,6 +7,7 @@ import Register from './modules/register';
 import { ToastContainer } from 'react-toastify';
 import Login from './modules/login';
 import GSM from './modules/GSM';
+import Users from './modules/users';
 
 function App() {
   const router = createBrowserRouter([
@@ -16,6 +17,7 @@ function App() {
     { path: "/register", Component: Register },
     { path: "/login", Component: Login },
     { path: "/gsm", Component: GSM },
+    { path: "/users", Component: Users },
   ]);
   const loggedInEmail = localStorage.getItem('loggedInEmail')
 
@@ -27,8 +29,8 @@ function App() {
           <a onClick={() => localStorage.removeItem('loggedInEmail')}>Logout</a>
         ) : (
           <>
-            <a href='/Login'>to Login</a>
-            <a href='/Register'>to Register</a>
+            <a href='/login'>to Login</a>
+            <a href='/register'>to Register</a>
           </>
         )}
       </div>
