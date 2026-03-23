@@ -13,3 +13,10 @@ Data transfer - Parent to Children - use Props
 Data transfer - Children to parent
 1. State uplifting
 2. Callback function
+
+context setup
+1. create config file
+2. create provider
+3. create global states
+4. spread out states to providers
+5. use useContext to store and fetch states

@@ -8,8 +8,13 @@ import { ToastContainer } from 'react-toastify';
 import Login from './modules/login';
 import GSM from './modules/GSM';
 import Users from './modules/users';
+import MyContext from './config/myContext';
+import { useState } from 'react';
+import NewContext from './config/newContext';
 
 function App() {
+  const [isCheck, setIsCheck] = useState<any>(false)
+  const [users, setUsers] = useState<any>([])
   const router = createBrowserRouter([
     { path: "/", Component: Home },
     { path: "/blog", Component: Blogs },
@@ -23,19 +28,24 @@ function App() {
 
   return (
     <>
-      <div>
-        {/* <a href='/blog'>to blog</a> */}
-        {loggedInEmail ? (
-          <a onClick={() => localStorage.removeItem('loggedInEmail')}>Logout</a>
-        ) : (
-          <>
-            <a href='/login'>to Login</a>
-            <a href='/register'>to Register</a>
-          </>
-        )}
-      </div>
-      <ToastContainer />
-      <RouterProvider router={router} />
+      <NewContext value={{ users, setUsers }}>
+        <MyContext value={{ isCheck, setIsCheck, test: 'test' }}>
+          <div>
+            {/* <a href='/blog'>to blog</a> */}
+            {loggedInEmail ? (
+              <a onClick={() => localStorage.removeItem('loggedInEmail')}>Logout</a>
+            ) : (
+              <>
+                <a href='/login'>to Login</a>
+                <a href='/register'>to Register</a>
+              </>
+            )}
+          </div>
+          <ToastContainer />
+          <RouterProvider router={router} />
+        </MyContext>
+
+      </NewContext>
     </>
   )
 }
