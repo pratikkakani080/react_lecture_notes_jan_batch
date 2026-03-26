@@ -11,6 +11,7 @@ import Users from './modules/users';
 import MyContext from './config/myContext';
 import { useState } from 'react';
 import NewContext from './config/newContext';
+import Cal from './modules/pi/cal';
 
 function App() {
   const [isCheck, setIsCheck] = useState<any>(false)
@@ -23,6 +24,7 @@ function App() {
     { path: "/login", Component: Login },
     { path: "/gsm", Component: GSM },
     { path: "/users", Component: Users },
+    { path: "/pi", Component: Cal },
   ]);
   const loggedInEmail = localStorage.getItem('loggedInEmail')
 
