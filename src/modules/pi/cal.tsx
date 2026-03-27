@@ -15,7 +15,8 @@ const Cal = () => {
     }, [count])
 
     const addTodo = () => {
-        setTodos((t) => [...t, "New Todo"]);
+        const newArr: any = [...todos, 'New Todo']
+        setTodos(newArr);
     };
 
     return (
@@ -35,7 +36,7 @@ const Cal = () => {
 
 export default Cal
 
-const expensiveCalculation = (num) => {
+const expensiveCalculation = (num: number) => {
     console.log("Calculating...");
     for (let i = 0; i < 1000000000; i++) {
         num += 1;

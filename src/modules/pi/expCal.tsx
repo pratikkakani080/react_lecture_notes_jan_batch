@@ -1,6 +1,6 @@
-import React, { memo } from 'react'
+import { memo } from 'react'
 
-function ExpCal({ count, increment, calculation }) {
+function ExpCal({ count, increment, calculation }: any) {
     console.log('this is child comp');
 
     return (

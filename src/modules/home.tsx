@@ -15,7 +15,7 @@ export default function Home() {
     }, [loggedInEmail])
     const [data, setData] = useState({ name: 'default' })
     const [state, setState] = useState(true)
-    const [todos, setTodos] = useState([])
+    const [todos] = useState([])
     const [filteredData, setFilteredData] = useState([])
     // console.log(state);
     // console.log('rendering');
@@ -57,8 +57,8 @@ export default function Home() {
     // axios.put('https://jsonplaceholder.typicode.com/todos', payload)
     // axios.delete('https://jsonplaceholder.typicode.com/todos/${id}')
 
-    const handleSearch = (e) => {
-        setFilteredData(todos.filter(el => el.title.includes(e.target.value)))
+    const handleSearch = (e: any) => {
+        setFilteredData(todos.filter((el: any) => el.title.includes(e.target.value)))
     }
 
     return (
@@ -77,7 +77,7 @@ export default function Home() {
             {aaaa}
             {data.name}
             <Button buttonText={'Toggle'} onClick={() => setState(!state)} data={data} />
-            {filteredData.map(el => {
+            {filteredData.map((el: any) => {
                 return (
                     <>
                         <span>{el.id} - {el.title}</span><br />

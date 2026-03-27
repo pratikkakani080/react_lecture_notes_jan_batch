@@ -12,7 +12,7 @@ instance.interceptors.request.use(function (config) {
     console.log(error);
     return Promise.reject(error);
 },
-    { synchronous: true, runWhen: () => /* This function returns true */}
+    { synchronous: true, runWhen: () => true/* This function returns true */}
 );
 
 // Add a response interceptor
