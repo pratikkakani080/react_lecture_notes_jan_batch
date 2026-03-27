@@ -38,7 +38,7 @@ function App() {
               <a onClick={() => localStorage.removeItem('loggedInEmail')}>Logout</a>
             ) : (
               <>
-                <a href='/login'>to Login</a>
+                <a href='/login'>to Login</a>{"     "}
                 <a href='/register'>to Register</a>
               </>
             )}
