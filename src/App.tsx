@@ -12,6 +12,9 @@ import MyContext from './config/myContext';
 import { useState } from 'react';
 import NewContext from './config/newContext';
 import Cal from './modules/pi/cal';
+import { ApolloProvider } from '@apollo/client/react';
+import client from './config/graphQl';
+import GraphQl from './modules/GraphQl';
 
 function App() {
   const [isCheck, setIsCheck] = useState<any>(false)
@@ -25,29 +28,32 @@ function App() {
     { path: "/gsm", Component: GSM },
     { path: "/users", Component: Users },
     { path: "/pi", Component: Cal },
+    { path: "/graphql", Component: GraphQl },
   ]);
   const loggedInEmail = localStorage.getItem('loggedInEmail')
 
   return (
     <>
-      <NewContext value={{ users, setUsers }}>
-        <MyContext value={{ isCheck, setIsCheck, test: 'test' }}>
-          <div>
-            {/* <a href='/blog'>to blog</a> */}
-            {loggedInEmail ? (
-              <a onClick={() => localStorage.removeItem('loggedInEmail')}>Logout</a>
-            ) : (
-              <>
-                <a href='/login'>to Login</a>{"     "}
-                <a href='/register'>to Register</a>
-              </>
-            )}
-          </div>
-          <ToastContainer />
-          <RouterProvider router={router} />
-        </MyContext>
+      <ApolloProvider client={client}>
+        <NewContext value={{ users, setUsers }}>
+          <MyContext value={{ isCheck, setIsCheck, test: 'test' }}>
+            <div>
+              {/* <a href='/blog'>to blog</a> */}
+              {loggedInEmail ? (
+                <a onClick={() => localStorage.removeItem('loggedInEmail')}>Logout</a>
+              ) : (
+                <>
+                  <a href='/login'>to Login</a>{"     "}
+                  <a href='/register'>to Register</a>
+                </>
+              )}
+            </div>
+            <ToastContainer />
+            <RouterProvider router={router} />
+          </MyContext>
 
-      </NewContext>
+        </NewContext>
+      </ApolloProvider>
     </>
   )
 }
