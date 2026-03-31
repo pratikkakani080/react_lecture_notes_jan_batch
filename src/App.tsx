@@ -30,24 +30,12 @@ function App() {
     { path: "/pi", Component: Cal },
     { path: "/graphql", Component: GraphQl },
   ]);
-  const loggedInEmail = localStorage.getItem('loggedInEmail')
 
   return (
     <>
       <ApolloProvider client={client}>
         <NewContext value={{ users, setUsers }}>
           <MyContext value={{ isCheck, setIsCheck, test: 'test' }}>
-            <div>
-              {/* <a href='/blog'>to blog</a> */}
-              {loggedInEmail ? (
-                <a onClick={() => localStorage.removeItem('loggedInEmail')}>Logout</a>
-              ) : (
-                <>
-                  <a href='/login'>to Login</a>{"     "}
-                  <a href='/register'>to Register</a>
-                </>
-              )}
-            </div>
             <ToastContainer />
             <RouterProvider router={router} />
           </MyContext>
