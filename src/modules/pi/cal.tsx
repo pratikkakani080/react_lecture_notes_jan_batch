@@ -1,10 +1,18 @@
 import { useCallback, useMemo, useState } from 'react';
 import ExpCal from './expCal';
+import { useDispatch, useSelector } from 'react-redux';
+import { decrement, incrementByAmount, incrementValue } from '../../config/reducers/counterSlice';
 
 
 const Cal = () => {
+    const counterValue = useSelector(state => state.counter.value)
+    const dispatch = useDispatch()
+    console.log(counterValue);
+
+
     const [count, setCount] = useState(0);
     const [todos, setTodos] = useState([]);
+    const [input, setInput] = useState(0)
 
     const calculation = useMemo(() => {
         return expensiveCalculation(count)
@@ -21,6 +29,10 @@ const Cal = () => {
 
     return (
         <div>
+            <input type="number" value={input} onChange={(e) => setInput(e.target.value)} />
+            <button onClick={() => dispatch(incrementValue())}>Increment</button>
+            <button onClick={() => dispatch(decrement())}>Decrement</button>
+            <button onClick={() => dispatch(incrementByAmount(input))}>Increment by {input}</button>
             <div>
                 <h2>My Todos</h2>
                 {todos.map((todo, index) => {

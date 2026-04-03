@@ -15,6 +15,8 @@ import Cal from './modules/pi/cal';
 import { ApolloProvider } from '@apollo/client/react';
 import client from './config/graphQl';
 import GraphQl from './modules/GraphQl';
+import { Provider } from 'react-redux';
+import { store } from './config/store';
 
 function App() {
   const [isCheck, setIsCheck] = useState<any>(false)
@@ -34,26 +36,28 @@ function App() {
 
   return (
     <>
-      <ApolloProvider client={client}>
-        <NewContext value={{ users, setUsers }}>
-          <MyContext value={{ isCheck, setIsCheck, test: 'test' }}>
-            <div>
-              {/* <a href='/blog'>to blog</a> */}
-              {loggedInEmail ? (
-                <a onClick={() => localStorage.removeItem('loggedInEmail')}>Logout</a>
-              ) : (
-                <>
-                  <a href='/login'>to Login</a>{"     "}
-                  <a href='/register'>to Register</a>
-                </>
-              )}
-            </div>
-            <ToastContainer />
-            <RouterProvider router={router} />
-          </MyContext>
+      <Provider store={store}>
+        <ApolloProvider client={client}>
+          <NewContext value={{ users, setUsers }}>
+            <MyContext value={{ isCheck, setIsCheck, test: 'test' }}>
+              <div>
+                {/* <a href='/blog'>to blog</a> */}
+                {loggedInEmail ? (
+                  <a onClick={() => localStorage.removeItem('loggedInEmail')}>Logout</a>
+                ) : (
+                  <>
+                    <a href='/login'>to Login</a>{"     "}
+                    <a href='/register'>to Register</a>
+                  </>
+                )}
+              </div>
+              <ToastContainer />
+              <RouterProvider router={router} />
+            </MyContext>
 
-        </NewContext>
-      </ApolloProvider>
+          </NewContext>
+        </ApolloProvider>
+      </Provider>
     </>
   )
 }
