@@ -1,14 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { fetchUserById } from '../actions/apis'
 
 export interface CounterState {
   value: number
   str: string
+  loading: string
+  entities: any[]
+  error: any
 }
 
 const initialState: CounterState = {
   value: 0,
-  str: ''
+  str: '',
+  loading: 'idle',
+  entities: [],
+  error: ''
 }
 
 export const counterSlice = createSlice({
@@ -29,7 +36,21 @@ export const counterSlice = createSlice({
       state.value += Number(action.payload)
     },
   },
-  extraReducers: () => {}
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchUserById.pending, (state) => {
+        state.loading = 'pending';
+      })
+      .addCase(fetchUserById.fulfilled, (state, action) => {
+        state.loading = 'idle';
+        state.entities = action.payload.products;
+      })
+      .addCase(fetchUserById.rejected, (state, action) => {
+        state.loading = 'idle';
+        state.error = action.payload || action.error.message;
+      });
+  },
+
 })
 
 // Action creators are generated for each case reducer function
