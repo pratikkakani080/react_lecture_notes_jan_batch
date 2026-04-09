@@ -30,3 +30,13 @@ context setup
 4. useMemo - used to cache value
 5. useCallback - used to cache functions
 6. React.memo - used to cache components
+
+### Homework
+1. Portfolio
+2. E-commerce web
+3. Calculator
+4. To-do list
+5. Kanban board
+6. Booking Web
+7. Dynamic Table
+8. Instagram
