@@ -17,6 +17,7 @@ import client from './config/graphQl';
 import GraphQl from './modules/GraphQl';
 import { Provider } from 'react-redux';
 import { store } from './config/store';
+import Test from './modules/Test';
 
 function App() {
   const [isCheck, setIsCheck] = useState<any>(false)
@@ -31,6 +32,7 @@ function App() {
     { path: "/users", Component: Users },
     { path: "/pi", Component: Cal },
     { path: "/graphql", Component: GraphQl },
+    { path: "/test", Component: Test },
   ]);
   const loggedInEmail = localStorage.getItem('loggedInEmail')
 

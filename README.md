@@ -7,6 +7,11 @@ Default hooks
 1. useState
 2. useEffect
 3. useContext
+4. useRef
+5. useMemo
+6. useCallback
+7. React.memo
+8. useReducer
 
 Data transfer - Parent to Children - use Props
 
